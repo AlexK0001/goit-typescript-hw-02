@@ -15,7 +15,6 @@ export default function App() {
     const [error, setError] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
-    // const [modalIsOpen, setModalIsOpen] = useState(false);
 
 
     const fetchImages = async () => {
@@ -48,10 +47,6 @@ export default function App() {
         setPage(prevPage => prevPage + 1);
     };
 
-    // const handleImageClick = (image) => {
-    //     setSelectedImage(image);
-    //     setIsModalOpen(true);
-    // };
 
     const openModal = (image) => {
       setSelectedImage(image);

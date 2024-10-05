@@ -1,11 +1,27 @@
 import Modal from "react-modal";
-import css from './ImageModal.module.css'
+import css from './ImageModal.module.css';
+import React from 'react';
 
 Modal.setAppElement("#root");
 
-const ImageModal = ({ isOpen, onClose, image }) => {
-    // const { largeImageURL, alt_description, user, likes } = image;
-  
+type Image = {
+  urls: {
+      full: string;
+  };
+  alt_description: string | null;
+  user: {
+      name: string;
+  };
+  likes: number;
+}
+
+type ImageModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  image?: Image | null;
+}
+
+const ImageModal = ({ isOpen, onClose, image }: ImageModalProps) => {
 
   return (
     <Modal
@@ -17,7 +33,7 @@ const ImageModal = ({ isOpen, onClose, image }) => {
       <div>
         <img
           src={image?.urls.full}
-          alt={image?.alt_description}
+          alt={image?.alt_description || 'Image'}
           width="100%"
         />
         <p>Author: {image?.user.name}</p>
