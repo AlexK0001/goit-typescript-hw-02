@@ -1,26 +1,17 @@
 import React from 'react';
+import { Image } from '../types';
 
-type Image = {
-    id: string;
-    urls: {
-        small: string;
-        medium: string;
-        large: string;
-    };
-    alt_description: string | null;
-    description?: string;
-};
 
 type ImageCardProps = {
     image: Image;
     onImageClick: (image: Image) => void;
-    openModal: () => void;
+    // openModal: () => void;
 };
 
-export default function ImageCard({ image, onImageClick, openModal }: ImageCardProps) {
+export default function ImageCard({ image, onImageClick }: ImageCardProps) {
     const handleClick = () => {
         onImageClick(image);
-        openModal();
+        // openModal();
     };
     return (
         <div onClick={handleClick}>

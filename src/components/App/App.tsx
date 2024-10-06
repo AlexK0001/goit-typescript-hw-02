@@ -5,16 +5,18 @@ import Loader from '../Loader/Loader';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
 import ImageModal from '../ImageModal/ImageModal';
+import { Image } from '../types';
 
 
 export default function App() {
-    const [images, setImages] = useState([]);
-    const [query, setQuery] = useState('');
-    const [page, setPage] = useState(1);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [images, setImages] = useState<Image[]>([]);
+    const [query, setQuery] = useState<string>('');
+    const [page, setPage] = useState<number>(1);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error, setError] = useState<string | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [selectedImage, setSelectedImage] = useState<Image | null>(null);
+
 
 
     const fetchImages = async () => {
@@ -23,7 +25,7 @@ export default function App() {
             const response = await fetch(`https://api.unsplash.com/search/photos?query=${query}&page=${page}&client_id=PvjMb00TBZQMjBYGyHn64d4ju2tX37ge2hlt-_SJJqA`);
             const data = await response.json();
             setImages(prevImages => [...prevImages, ...data.results]);
-        } catch (error) {
+        } catch (error: any) {
             setError(error.message);
         } finally {
             setLoading(false);
@@ -37,7 +39,7 @@ export default function App() {
     }, [query, page]);
 
 
-    const handleSearchSubmit = (newQuery) => {
+    const handleSearchSubmit = (newQuery: string) => {
         setQuery(newQuery);
         setPage(1);
         setImages([]);
@@ -48,7 +50,7 @@ export default function App() {
     };
 
 
-    const openModal = (image) => {
+    const openModal = (image: Image) => {
       setSelectedImage(image);
       setIsModalOpen(true);
     };
@@ -68,7 +70,7 @@ export default function App() {
             {isModalOpen && selectedImage && (
             <ImageModal
             image={selectedImage} 
-            isOpen={openModal} 
+            isOpen={isModalOpen} 
             onClose={closeModal}
             />
       )}

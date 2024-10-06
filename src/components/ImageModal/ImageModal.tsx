@@ -1,19 +1,10 @@
 import Modal from "react-modal";
 import css from './ImageModal.module.css';
 import React from 'react';
+import { Image } from '../types';
 
 Modal.setAppElement("#root");
 
-type Image = {
-  urls: {
-      full: string;
-  };
-  alt_description: string | null;
-  user: {
-      name: string;
-  };
-  likes: number;
-}
 
 type ImageModalProps = {
   isOpen: boolean;
