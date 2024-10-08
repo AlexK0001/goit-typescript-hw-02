@@ -17,13 +17,17 @@ export default function App() {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [selectedImage, setSelectedImage] = useState<Image | null>(null);
 
+    type UnsplashResponse = {
+        total: number;
+        total_pages: number;
+        results: Image[];
+      }
 
-
-    const fetchImages = async () => {
+    const fetchImages = async (): Promise<void> => {
         setLoading(true);
         try {
             const response: Response = await fetch(`https://api.unsplash.com/search/photos?query=${query}&page=${page}&client_id=PvjMb00TBZQMjBYGyHn64d4ju2tX37ge2hlt-_SJJqA`);
-            const data = await response.json();
+            const data: UnsplashResponse = await response.json();
             setImages(prevImages => [...prevImages, ...data.results]);
         } catch (error: any) {
             setError(error.message);
